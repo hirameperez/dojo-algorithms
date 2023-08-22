@@ -27,19 +27,21 @@ export class LinkedList {
    * 
    */
   add(val: number) {
-    const newNode = new Node(val);
+    const newNode = new Node(val); //1
 
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = this.head;
+    if (!this.head) {  // 1
+      this.head = newNode; // 1
+      this.tail = this.head; //1
     } else {
-      let current = this.head;
+      this.tail.next = newNode;
+      this.tail = newNode;
+      // let current = this.head;
 
-      while (current.next) {
-        current = current.next;
-      }
+      // while (current.next) {
+      //   current = current.next;
+      // }
 
-      current.next = newNode;
+      // current.next = newNode; // n
     }
 
     this.size++;
@@ -72,7 +74,7 @@ export class LinkedList {
   }
 
   print() {
-    // if (!this.head || this.isCycled()) return "";
+    if (!this.head || this.isCycled()) return "";
 
     let current = this.head;
     const values = [current.value];
@@ -86,16 +88,20 @@ export class LinkedList {
   }
 
   isCycled(): boolean {
-    return false;
+    return !!this.tail.next;
   }
 }
 
 const values = [3, 2, 0, -4];
 const list = new LinkedList();
 
-values.forEach(v => list.add(v));
+// values.forEach(v => list.add(v));
 
-list.add(9);
+// list.add(9);
 
-console.log(list.print())
+list.addToHead(values, -1);
+
+console.log(list.isCycled()); // true
+
+console.log(list.print()); // ''
 
