@@ -92,3 +92,10 @@ export class LinkedList {
 
 const values = [3, 2, 0, -4];
 const list = new LinkedList();
+
+values.forEach(v => list.add(v));
+
+list.add(9);
+
+console.log(list.print())
+
